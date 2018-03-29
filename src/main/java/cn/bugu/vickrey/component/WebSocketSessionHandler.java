@@ -2,8 +2,8 @@ package cn.bugu.vickrey.component;
 
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketHandler;
@@ -14,11 +14,10 @@ import org.springframework.web.socket.WebSocketSession;
  * 消息处理类
  *
  */
-@Component("websocket")
 public class WebSocketSessionHandler implements WebSocketHandler{
 	
 	//静态变量，用来记录当前连接数。应该把它设计成线程安全的。
-    private static int onlineCount = 0;
+    private static AtomicInteger onlineCount = new AtomicInteger(0);
 	
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
 	private static CopyOnWriteArraySet<WebSocketSession> webSocketSet = new CopyOnWriteArraySet<WebSocketSession>();
@@ -37,11 +36,15 @@ public class WebSocketSessionHandler implements WebSocketHandler{
 	    //将消息进行转化，因为是消息是json数据，可能里面包含了发送给某个人的信息，所以需要用json相关的工具类处理之后再封装成TextMessage，
 	    //我这儿并没有做处理，消息的封装格式一般有{from:xxxx,to:xxxxx,msg:xxxxx}，来自哪里，发送给谁，什么消息等等	    
 		System.out.println("来自客户端的消息:" + message.getPayload().toString());
-		TextMessage msg = new TextMessage(message.getPayload().toString());
+		TextMessage msg = null;
+		if (message.getPayload() instanceof String) {
+			msg = new TextMessage(message.getPayload().toString());
+			sendMessagesToUsers(msg);
+		}
 
 		//TextMessage msg = (TextMessage)message.getPayload();
 		//给所有用户群发消息
-	    sendMessagesToUsers(msg);
+	    //sendMessagesToUsers(msg);
 	    //给指定用户群发消息
 	    //sendMessageToUser(userId,msg);  
 	}
@@ -103,15 +106,15 @@ public class WebSocketSessionHandler implements WebSocketHandler{
 		}
 	}
 	
-	public static synchronized int getOnlineCount() {
-        return onlineCount;
+	public static int getOnlineCount() {
+        return onlineCount.get();
     }
 
-    public static synchronized void addOnlineCount() {
-    	WebSocketSessionHandler.onlineCount++;
+    public static void addOnlineCount() {
+    	WebSocketSessionHandler.onlineCount.incrementAndGet();
     }
 
-    public static synchronized void subOnlineCount() {
-    	WebSocketSessionHandler.onlineCount--;
+    public static void subOnlineCount() {
+    	WebSocketSessionHandler.onlineCount.decrementAndGet();
     }
 }
