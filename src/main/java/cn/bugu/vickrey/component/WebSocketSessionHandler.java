@@ -1,10 +1,9 @@
-package cn.bugu.vickrey.handler;
+package cn.bugu.vickrey.component;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketHandler;
@@ -15,6 +14,7 @@ import org.springframework.web.socket.WebSocketSession;
  * 消息处理类
  *
  */
+@Component("websocket")
 public class WebSocketSessionHandler implements WebSocketHandler{
 	
 	//静态变量，用来记录当前连接数。应该把它设计成线程安全的。

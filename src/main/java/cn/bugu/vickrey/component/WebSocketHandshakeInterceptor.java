@@ -1,4 +1,4 @@
-package cn.bugu.vickrey.interceptor;
+package cn.bugu.vickrey.component;
 
 import java.util.Map;
 
@@ -12,7 +12,6 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 
 public class WebSocketHandshakeInterceptor implements HandshakeInterceptor {
 
-    //握手前
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) throws Exception {
 		//将ServerHttpRequest转换成request请求相关的类，用来获取request域中的用户信息	
@@ -27,7 +26,6 @@ public class WebSocketHandshakeInterceptor implements HandshakeInterceptor {
 		return true;
 	}
     
-    //握手后
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response,
             WebSocketHandler handler, Exception e) {
     	
