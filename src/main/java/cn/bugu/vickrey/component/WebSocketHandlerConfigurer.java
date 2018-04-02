@@ -13,7 +13,8 @@ public class WebSocketHandlerConfigurer implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(getHandler(), "/websocket").addInterceptors(new WebSocketHandshakeInterceptor());
+    	registry.addHandler(getHandler(), "/websocket").addInterceptors(new WebSocketHandshakeInterceptor()).setAllowedOrigins("*");
+    	registry.addHandler(getHandler(), "/socketjs").addInterceptors(new WebSocketHandshakeInterceptor()).setAllowedOrigins("*").withSockJS();
     }
 
     @Bean
