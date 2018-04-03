@@ -45,13 +45,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.7</version>
         </dependency>
-    
-        <dependency>
-            <groupId>javax.websocket</groupId>
-            <artifactId>javax.websocket-api</artifactId>
-            <version>1.1</version>
-            <scope>provided</scope>
-        </dependency>
         
         <!-- 导入java ee jar 包 -->
 		<dependency>
@@ -169,13 +162,6 @@
 	      <version>${log4j2.version}</version>
 	    </dependency>
 	    <!-- log4j2 end -->
-
-		<!-- 映入JSON -->
-		<!-- <dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency> -->
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
