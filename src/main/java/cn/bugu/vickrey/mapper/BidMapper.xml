@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugu.vickrey.dao.BidMapper">
+  <resultMap id="BaseResultMap" type="cn.bugu.vickrey.domain.Bid">
+    <result column="BID_ID" jdbcType="INTEGER" property="bidId" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="PRODUCT_ID" jdbcType="INTEGER" property="productId" />
+    <result column="ROUND" jdbcType="INTEGER" property="round" />
+    <result column="BID_PRICE" jdbcType="DECIMAL" property="bidPrice" />
+    <result column="BID_TIME" jdbcType="TIMESTAMP" property="bidTime" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.bugu.vickrey.domain.Bid">
+    insert into t_bid (BID_ID, USER_ID, PRODUCT_ID, 
+      ROUND, BID_PRICE, BID_TIME
+      )
+    values (#{bidId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
+      #{round,jdbcType=INTEGER}, #{bidPrice,jdbcType=DECIMAL}, #{bidTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bugu.vickrey.domain.Bid">
+    insert into t_bid
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bidId != null">
+        BID_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="round != null">
+        ROUND,
+      </if>
+      <if test="bidPrice != null">
+        BID_PRICE,
+      </if>
+      <if test="bidTime != null">
+        BID_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bidId != null">
+        #{bidId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="round != null">
+        #{round,jdbcType=INTEGER},
+      </if>
+      <if test="bidPrice != null">
+        #{bidPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="bidTime != null">
+        #{bidTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

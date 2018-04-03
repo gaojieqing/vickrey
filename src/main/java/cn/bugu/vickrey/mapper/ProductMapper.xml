@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugu.vickrey.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="cn.bugu.vickrey.domain.Product">
+    <result column="PRODUCT_ID" jdbcType="INTEGER" property="productId" />
+    <result column="PRICE" jdbcType="DECIMAL" property="price" />
+    <result column="REPURCHASE_ROUND" jdbcType="INTEGER" property="repurchaseRound" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.bugu.vickrey.domain.Product">
+    insert into t_product (PRODUCT_ID, PRICE, REPURCHASE_ROUND
+      )
+    values (#{productId,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{repurchaseRound,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bugu.vickrey.domain.Product">
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="repurchaseRound != null">
+        REPURCHASE_ROUND,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="repurchaseRound != null">
+        #{repurchaseRound,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

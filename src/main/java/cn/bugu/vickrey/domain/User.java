@@ -1,4 +1,4 @@
-package cn.bugu.vickrey.pojo;
+package cn.bugu.vickrey.domain;
 
 import java.io.Serializable;
 

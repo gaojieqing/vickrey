@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugu.vickrey.dao.DiscountMapper">
+  <resultMap id="BaseResultMap" type="cn.bugu.vickrey.domain.Discount">
+    <result column="DISCOUNT_ID" jdbcType="INTEGER" property="discountId" />
+    <result column="REPURCHASE_ROUND" jdbcType="INTEGER" property="repurchaseRound" />
+    <result column="REMAIN_ROUND" jdbcType="INTEGER" property="remainRound" />
+    <result column="DISCOUNT_RATE" jdbcType="DECIMAL" property="discountRate" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.bugu.vickrey.domain.Discount">
+    insert into t_discount (DISCOUNT_ID, REPURCHASE_ROUND, REMAIN_ROUND, 
+      DISCOUNT_RATE)
+    values (#{discountId,jdbcType=INTEGER}, #{repurchaseRound,jdbcType=INTEGER}, #{remainRound,jdbcType=INTEGER}, 
+      #{discountRate,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bugu.vickrey.domain.Discount">
+    insert into t_discount
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="discountId != null">
+        DISCOUNT_ID,
+      </if>
+      <if test="repurchaseRound != null">
+        REPURCHASE_ROUND,
+      </if>
+      <if test="remainRound != null">
+        REMAIN_ROUND,
+      </if>
+      <if test="discountRate != null">
+        DISCOUNT_RATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="discountId != null">
+        #{discountId,jdbcType=INTEGER},
+      </if>
+      <if test="repurchaseRound != null">
+        #{repurchaseRound,jdbcType=INTEGER},
+      </if>
+      <if test="remainRound != null">
+        #{remainRound,jdbcType=INTEGER},
+      </if>
+      <if test="discountRate != null">
+        #{discountRate,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>
