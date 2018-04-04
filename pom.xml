@@ -1,16 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>cn.bugu</groupId>
-  <artifactId>vickrey</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>vickrey Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  
-  <properties>
-  		<!-- java版本 -->
-  		<java.version>1.8</java.version>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.bugu</groupId>
+	<artifactId>vickrey</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>vickrey Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<!-- java版本 -->
+		<java.version>1.8</java.version>
 		<!-- spring版本号 -->
 		<spring.version>5.0.4.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
@@ -24,36 +24,36 @@
 		<!-- jdbc版本 -->
 		<jdbc.version>6.0.6</jdbc.version>
 	</properties>
-	
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-    
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-    
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
-        </dependency>
-        
-        <!-- 导入java ee jar 包 -->
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
+
+		<!-- 导入java ee jar 包 -->
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
 		</dependency>
-        
-        <!-- spring核心包 -->
+
+		<!-- spring核心包 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -99,17 +99,17 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<dependency>  
-		    <groupId>org.springframework</groupId>  
-		    <artifactId>spring-websocket</artifactId>  
-		    <version>${spring.version}</version>  
-		</dependency>  
-		<dependency>  
-		    <groupId>org.springframework</groupId>  
-		    <artifactId>spring-messaging</artifactId>  
-		    <version>${spring.version}</version>  
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
 		<!-- mybatis核心包 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -123,8 +123,8 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>${mybatis-spring.version}</version>
 		</dependency>
-        
-        <!-- 导入Mysql数据库链接jar包 -->
+
+		<!-- 导入Mysql数据库链接jar包 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -144,25 +144,26 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
 		<!-- log4j2 begin -->
 		<dependency>
-	        <groupId>org.apache.logging.log4j</groupId>
-	        <artifactId>log4j-api</artifactId>
-	        <version>${log4j2.version}</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.apache.logging.log4j</groupId>
-	        <artifactId>log4j-core</artifactId>
-	        <version>${log4j2.version}</version>
-	    </dependency>
-	    <dependency>
-	      <groupId>org.apache.logging.log4j</groupId>
-	      <artifactId>log4j-web</artifactId>
-	      <version>${log4j2.version}</version>
-	    </dependency>
-	    <!-- log4j2 end -->
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-web</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<!-- log4j2 end -->
 
+		<!-- jackson start -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -178,6 +179,7 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
+		<!-- jackson end -->
 
 		<!-- 上传组件包 -->
 		<dependency>
@@ -195,60 +197,60 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
-        
-    </dependencies>
-    <build>
-        <finalName>vickrey</finalName>
-        <pluginManagement>
-	        <plugins>  
-				<plugin>  
-			        <groupId>org.apache.maven.plugins</groupId>  
-	        		<artifactId>maven-compiler-plugin</artifactId>  
-	        		<configuration>  
-	          		<source>${java.version}</source>  
-	          		<target>${java.version}</target>  
-	        		</configuration>  
-	      		</plugin>
-	      		
-	      		<plugin>
-	               	<groupId>org.mybatis.generator</groupId>
-	               	<artifactId>mybatis-generator-maven-plugin</artifactId>
-	              	<version>${mybatis-generator.version}</version>
-	               	<executions>
-	                   	<execution>
-	                       	<id>Generate MyBatis Artifacts</id>
-	                       	<goals>
-	                           	<goal>generate</goal>
-	                       	</goals>
-	                   	</execution>
-	               	</executions>
+
+	</dependencies>
+	<build>
+		<finalName>vickrey</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
-	                   	<!-- generator 工具配置文件的位置 -->
-	                   	<configurationFile>src/main/resources/mybatis-generator-config.xml</configurationFile>
-	                   	<verbose>true</verbose>
-	                   	<overwrite>true</overwrite>
-	               	</configuration>
-	               	<dependencies>
-	                    <dependency>
-	                        <groupId>mysql</groupId>
-	                        <artifactId>mysql-connector-java</artifactId>
-	                        <version>${jdbc.version}</version>
-	                    </dependency>
-	                    <dependency>
-	                        <groupId>org.mybatis.generator</groupId>
-	                        <artifactId>mybatis-generator-core</artifactId>
-	                        <version>${mybatis-generator.version}</version>
-	                    </dependency>
-	               </dependencies>
-	           </plugin>
-	           <plugin>
-	               <groupId>org.springframework.boot</groupId>
-	               <artifactId>spring-boot-maven-plugin</artifactId>
-	               <configuration>
-	                   <classifier>exec</classifier>
-	               </configuration>
-	           </plugin>
-	    	</plugins>
-	   	</pluginManagement>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.mybatis.generator</groupId>
+					<artifactId>mybatis-generator-maven-plugin</artifactId>
+					<version>${mybatis-generator.version}</version>
+					<executions>
+						<execution>
+							<id>Generate MyBatis Artifacts</id>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<!-- generator 工具配置文件的位置 -->
+						<configurationFile>src/main/resources/mybatis-generator-config.xml</configurationFile>
+						<verbose>true</verbose>
+						<overwrite>true</overwrite>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>mysql</groupId>
+							<artifactId>mysql-connector-java</artifactId>
+							<version>${jdbc.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.mybatis.generator</groupId>
+							<artifactId>mybatis-generator-core</artifactId>
+							<version>${mybatis-generator.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<classifier>exec</classifier>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>

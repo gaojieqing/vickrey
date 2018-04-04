@@ -16,29 +16,29 @@ import org.springframework.web.socket.WebSocketSession;
  * 消息处理类
  *
  */
-public class WebSocketSessionHandler implements WebSocketHandler{
-	
+public class WebSocketSessionHandler implements WebSocketHandler {
+
 	private static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
-	
-	//静态变量，用来记录当前连接数。应该把它设计成线程安全的。
-    private static AtomicInteger onlineCount = new AtomicInteger(0);
-	
-    //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
+
+	// 静态变量，用来记录当前连接数。应该把它设计成线程安全的。
+	private static AtomicInteger onlineCount = new AtomicInteger(0);
+
+	// concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
 	private static CopyOnWriteArraySet<WebSocketSession> webSocketSet = new CopyOnWriteArraySet<WebSocketSession>();
-	
-	//用户进入系统监听
+
+	// 用户进入系统监听
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        webSocketSet.add(session);  //加入set中
-        addOnlineCount();           //在线数加1
-        logger.info("有新连接加入！当前连接数为" + getOnlineCount());
+		webSocketSet.add(session); // 加入set中
+		addOnlineCount(); // 在线数加1
+		logger.info("有新连接加入！当前连接数为" + getOnlineCount());
 	}
 
 	//
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-	    //将消息进行转化，因为是消息是json数据，可能里面包含了发送给某个人的信息，所以需要用json相关的工具类处理之后再封装成TextMessage，
-	    //我这儿并没有做处理，消息的封装格式一般有{from:xxxx,to:xxxxx,msg:xxxxx}，来自哪里，发送给谁，什么消息等等	    
+		// 将消息进行转化，因为是消息是json数据，可能里面包含了发送给某个人的信息，所以需要用json相关的工具类处理之后再封装成TextMessage，
+		// 我这儿并没有做处理，消息的封装格式一般有{from:xxxx,to:xxxxx,msg:xxxxx}，来自哪里，发送给谁，什么消息等等
 		logger.info("来自客户端的消息:" + message.getPayload().toString());
 		TextMessage msg = null;
 		if (message.getPayload() instanceof String) {
@@ -46,45 +46,45 @@ public class WebSocketSessionHandler implements WebSocketHandler{
 			sendMessagesToUsers(msg);
 		}
 
-		//TextMessage msg = (TextMessage)message.getPayload();
-		//给所有用户群发消息
-	    //sendMessagesToUsers(msg);
-	    //给指定用户群发消息
-	    //sendMessageToUser(userId,msg);  
+		// TextMessage msg = (TextMessage)message.getPayload();
+		// 给所有用户群发消息
+		// sendMessagesToUsers(msg);
+		// 给指定用户群发消息
+		// sendMessageToUser(userId,msg);
 	}
-        
-    //后台错误信息处理方法
+
+	// 后台错误信息处理方法
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-		//exception.printStackTrace();
+		// exception.printStackTrace();
 		logger.error(exception);
 	}
 
-	//用户退出后的处理，不如退出之后，要将用户信息从websocket的session中remove掉，这样用户就处于离线状态了，也不会占用系统资源
+	// 用户退出后的处理，不如退出之后，要将用户信息从websocket的session中remove掉，这样用户就处于离线状态了，也不会占用系统资源
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-		if(session.isOpen()){
+		if (session.isOpen()) {
 			session.close();
 		}
-		webSocketSet.remove(session);  //从set中删除
-		subOnlineCount();              //在线数减1
+		webSocketSet.remove(session); // 从set中删除
+		subOnlineCount(); // 在线数减1
 		logger.info("有一连接关闭！当前连接数为" + getOnlineCount());
-		
+
 	}
 
 	@Override
 	public boolean supportsPartialMessages() {
 		return false;
 	}
-	
+
 	/**
 	 * 给所有的用户发送消息
 	 */
-	public void sendMessagesToUsers(TextMessage message){
-		for(WebSocketSession session : webSocketSet){
+	public void sendMessagesToUsers(TextMessage message) {
+		for (WebSocketSession session : webSocketSet) {
 			try {
-			    //isOpen()在线就发送
-				if(session.isOpen()){
+				// isOpen()在线就发送
+				if (session.isOpen()) {
 					session.sendMessage(message);
 				}
 			} catch (IOException e) {
@@ -92,16 +92,16 @@ public class WebSocketSessionHandler implements WebSocketHandler{
 			}
 		}
 	}
-	
+
 	/**
 	 * 发送消息给指定的用户
 	 */
-	public void sendMessageToUser(String userId,TextMessage message){
-		for(WebSocketSession session : webSocketSet){
-			if(session.getAttributes().get("userid").equals(userId)){
+	public void sendMessageToUser(String userId, TextMessage message) {
+		for (WebSocketSession session : webSocketSet) {
+			if (session.getAttributes().get("userid").equals(userId)) {
 				try {
-				    //isOpen()在线就发送
-					if(session.isOpen()){
+					// isOpen()在线就发送
+					if (session.isOpen()) {
 						session.sendMessage(message);
 					}
 				} catch (IOException e) {
@@ -110,16 +110,16 @@ public class WebSocketSessionHandler implements WebSocketHandler{
 			}
 		}
 	}
-	
+
 	public static int getOnlineCount() {
-        return onlineCount.get();
-    }
+		return onlineCount.get();
+	}
 
-    public static void addOnlineCount() {
-    	WebSocketSessionHandler.onlineCount.incrementAndGet();
-    }
+	public static void addOnlineCount() {
+		WebSocketSessionHandler.onlineCount.incrementAndGet();
+	}
 
-    public static void subOnlineCount() {
-    	WebSocketSessionHandler.onlineCount.decrementAndGet();
-    }
+	public static void subOnlineCount() {
+		WebSocketSessionHandler.onlineCount.decrementAndGet();
+	}
 }

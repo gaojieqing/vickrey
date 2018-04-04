@@ -5,5 +5,7 @@ import cn.bugu.vickrey.domain.User;
 public interface IUserService {
 	
 	public boolean put(User user);
+	
+	public boolean delete(String username);
 
 }

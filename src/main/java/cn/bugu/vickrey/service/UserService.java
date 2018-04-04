@@ -17,4 +17,9 @@ public class UserService implements IUserService{
 	public boolean put(User user) {
 		return userMapper.insertSelective(user)==1?true:false;
 	}
+
+	@Override
+	public boolean delete(String username) {
+		return userMapper.delete(username)==1?true:false;
+	}
 }
