@@ -1,4 +1,4 @@
-package cn.bugu.vickrey.component;
+package cn.bugu.vickrey.interceptor;
 
 import java.util.Map;
 

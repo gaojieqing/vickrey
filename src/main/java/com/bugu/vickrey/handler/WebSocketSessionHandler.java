@@ -1,4 +1,4 @@
-package cn.bugu.vickrey.component;
+package com.bugu.vickrey.handler;
 
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
